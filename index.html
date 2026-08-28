@@ -1,0 +1,1447 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 財務工具互動指引｜新版完整原型</title>
+<style>
+:root{--navy:#000079;--orange:#F75000;--red:#930000;--ink:#111827;--muted:#667085}
+*{box-sizing:border-box} body{margin:0;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif}
+button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 20px 72px}.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid #eceef2;margin:0 -20px;padding:0 20px}.navin{max-width:1180px;margin:auto;min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-size:15px;font-weight:850;color:var(--navy);white-space:nowrap}.tabs{display:flex;gap:4px;overflow:auto}.tab{border:0;background:transparent;color:#5c6470;font-size:14px;font-weight:750;padding:10px 13px;border-radius:999px;cursor:pointer;white-space:nowrap}.tab.active{background:#f0f1f4;color:#111827}.view{display:none;padding-top:56px}.view.active{display:block}.hero{padding:52px 0 34px}.eyebrow{font-size:14px;font-weight:850;letter-spacing:.08em;color:var(--orange);margin-bottom:14px}.display{font-size:clamp(40px,7vw,76px);line-height:1.04;letter-spacing:-.045em;font-weight:850;margin:0;max-width:950px}.lead{font-size:clamp(17px,2vw,22px);line-height:1.65;color:var(--muted);max-width:760px;margin:22px 0 0}.btn{min-height:48px;padding:0 22px;border-radius:999px;border:0;background:var(--navy);color:#fff;font-weight:800;cursor:pointer}.btn.orange{background:var(--orange)}.btn.alt{background:#fff;color:var(--ink);border:1px solid #d6d9df}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.progress-wrap{display:flex;align-items:center;gap:12px;margin:28px 0 12px}.progress{height:6px;flex:1;background:#eceef2;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;background:var(--orange);width:0;transition:width .25s}.step-label{font-size:13px;font-weight:800;color:#6b7280}.diag{display:none}.diag.active{display:block}.title{font-size:clamp(30px,4.5vw,52px);line-height:1.08;letter-spacing:-.035em;margin:0 0 10px;font-weight:850}.sub{font-size:17px;line-height:1.65;color:var(--muted);margin:0 0 28px;max-width:760px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.choice,.pain{width:100%;text-align:left;border:1px solid #e2e5ea;background:#fff;border-radius:24px;padding:24px;min-height:148px;cursor:pointer}.choice.selected,.pain.selected{border:2px solid var(--orange);background:#fff7f1}.icon{font-size:31px;margin-bottom:16px;display:block}.choice h3,.pain h3{font-size:21px;margin:0 0 7px}.choice p,.pain p{font-size:14px;line-height:1.55;color:#68717d;margin:0}.hint{font-size:13px;color:#737b87;margin-top:14px}.hidden{display:none!important}.result-hero{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:end}.score{background:var(--navy);color:#fff;border-radius:30px;padding:30px}.score small{font-weight:750;opacity:.8}.score strong{font-size:58px;line-height:1;display:block;margin:9px 0}.scorebar{height:7px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden;margin-top:15px}.scorebar span{display:block;height:100%;background:var(--orange)}.recs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:30px}.rec{border-top:1px solid #dadde3;padding-top:18px}.rank{font-size:12px;font-weight:850;color:var(--orange);margin-bottom:8px}.rec h4{font-size:21px;margin:0 0 7px}.rec p{font-size:14px;line-height:1.6;color:#6b7280;margin:0}.pill{display:inline-block;margin-top:10px;padding:6px 10px;border-radius:999px;background:#f0f1f4;font-size:12px;font-weight:800}.roi-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px}.panel{border:1px solid #e3e6eb;border-radius:26px;padding:24px;background:#fff}.field{margin-bottom:22px}.field-top{display:flex;justify-content:space-between;gap:12px;font-size:14px;font-weight:750;margin-bottom:8px}.field-top b{color:var(--navy)}input[type=range]{width:100%;accent-color:var(--navy)}.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.kpi{border-radius:22px;padding:22px;background:#f6f7f9}.kpi small{display:block;color:#6b7280;font-weight:700;margin-bottom:8px}.kpi strong{font-size:31px}.kpi.main{background:var(--navy);color:#fff}.kpi.main small{color:#c6c7ea}.note{margin-top:16px;padding:14px 16px;border-left:4px solid #FFD306;background:#fffbea;font-size:13px;line-height:1.6;color:#5f6671}.tools-top{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}.search,.select{min-height:44px;border:1px solid #d8dce2;background:#fff;border-radius:14px;padding:0 14px;font-size:15px}.search{min-width:260px;flex:1}.tool-list,.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.tool,.case{border:1px solid #e3e6eb;border-radius:22px;padding:20px;background:#fff}.tool-top{display:flex;justify-content:space-between;gap:10px}.tool h3,.case h3{font-size:19px;margin:0}.vendor,.case-tag{font-size:13px;color:var(--navy);font-weight:800;margin-top:3px}.tool p,.case p{font-size:13px;line-height:1.55;color:#6b7280}.meta{display:inline-block;font-size:11px;font-weight:750;background:#f0f1f4;padding:6px 9px;border-radius:999px;margin-right:6px}.price{font-size:13px;font-weight:850;color:var(--red)}.metric{display:flex;gap:12px;align-items:baseline;margin-top:18px;padding-top:16px;border-top:1px solid #e6e8ec}.metric strong{font-size:28px;color:var(--orange)}.timeline{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}.stage{border-top:4px solid var(--navy);padding:14px 10px 0}.stage:nth-child(3),.stage:nth-child(4){border-top-color:var(--orange)}.stage-num{font-size:12px;font-weight:850;color:var(--navy)}.stage h4{font-size:16px;margin:8px 0 5px}.stage p{font-size:12px;line-height:1.5;color:#6b7280}.risk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:46px}.risk{border-radius:22px;background:#f7f8fa;padding:20px}.risk h4{font-size:17px;margin:0 0 6px}.risk p{font-size:13px;line-height:1.55;color:#68717d}.section-head{font-size:32px;margin:0 0 20px}
+@media(max-width:850px){.grid3,.recs,.risk-grid,.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.result-hero,.roi-grid{grid-template-columns:1fr}.navin{align-items:flex-start;flex-direction:column;padding:12px 0}.tabs{width:100%}.display{font-size:48px}.case-grid,.tool-list{grid-template-columns:1fr}}
+@media(max-width:560px){.grid2,.grid3,.recs,.kpis,.risk-grid,.timeline{grid-template-columns:1fr}.display{font-size:39px}.title{font-size:34px}}
+
+/* First-visit intro modal */
+.intro-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.48);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .28s ease}.intro-overlay.show{opacity:1;pointer-events:auto}.intro-card{width:min(760px,100%);background:#fff;border-radius:28px;padding:30px;box-shadow:0 28px 80px rgba(15,23,42,.22);border-top:5px solid var(--orange);transform:translateY(10px) scale(.985);transition:transform .28s ease}.intro-overlay.show .intro-card{transform:none}.intro-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:1px solid #e7e9ee}.intro-badge{display:inline-flex;align-items:center;border-radius:999px;background:var(--navy);color:#fff;padding:7px 11px;font-size:13px;font-weight:800}.intro-close{width:42px;height:42px;border:0;background:transparent;border-radius:999px;font-size:28px;line-height:1;color:#98a2b3;cursor:pointer}.intro-close:hover{background:#f2f4f7;color:#475467}.intro-kicker{margin-top:20px;color:var(--orange);font-size:14px;font-weight:850}.intro-title{font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.035em;margin:6px 0 18px}.intro-message{border:1px solid #e4e7ec;border-radius:18px;padding:18px;background:#f8fafc;font-size:17px;line-height:1.65;color:#475467}.intro-message strong{color:var(--navy);font-size:20px}.intro-note{margin-top:14px;font-size:13px;line-height:1.55;color:#667085}.intro-actions{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.intro-check{display:flex;align-items:center;gap:9px;color:#667085;font-size:14px}.intro-check input{width:18px;height:18px;accent-color:var(--navy)}@media(max-width:560px){.intro-card{padding:22px;border-radius:22px}.intro-actions{align-items:stretch}.intro-actions .btn{width:100%}}@media(prefers-reduced-motion:reduce){.intro-overlay,.intro-card{transition:none}}
+
+
+.method-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(15,23,42,.52);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s ease}
+.method-overlay.show{opacity:1;pointer-events:auto}
+.method-card{width:min(940px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:26px;padding:26px;box-shadow:0 30px 90px rgba(15,23,42,.25);border-top:5px solid var(--orange)}
+.method-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:14px;border-bottom:2px solid var(--navy)}
+.method-badge{display:inline-flex;align-items:center;border-radius:8px;background:var(--navy);color:#fff;padding:7px 11px;font-size:13px;font-weight:800}
+.method-close{width:42px;height:42px;border:0;background:transparent;border-radius:999px;font-size:28px;color:#98a2b3;cursor:pointer}
+.method-title{font-size:clamp(25px,4vw,35px);line-height:1.15;margin:18px 0 10px}
+.method-lead{font-size:15px;line-height:1.7;color:#475467;margin:0 0 18px}
+.method-callout{background:#f8fafc;border:1px solid #e4e7ec;border-radius:16px;padding:16px;margin:14px 0}
+.method-callout strong{color:var(--navy)}
+.method-vars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.method-var{border:1px solid #e4e7ec;border-radius:12px;padding:11px 12px;font-size:14px;line-height:1.55}
+.formula-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.formula{border:1px solid #dfe3e8;border-left:5px solid var(--navy);border-radius:14px;padding:15px}
+.formula.orange{border-left-color:var(--orange)}.formula.green{border-left-color:#047857}.formula.red{border-left-color:var(--red)}
+.formula h4{font-size:17px;margin:0 0 9px}.formula code{display:block;background:#f7f8fa;border-radius:9px;padding:12px;font-size:14px;font-weight:800;white-space:normal;line-height:1.6}
+.formula p{font-size:13px;line-height:1.6;color:#667085;margin:9px 0 0}
+.method-warning{margin-top:16px;background:#fffbea;border-left:5px solid #FFD306;border-radius:12px;padding:14px;font-size:13px;line-height:1.65;color:#475467}
+.method-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid #e4e7ec}
+@media(max-width:650px){.method-vars,.formula-grid{grid-template-columns:1fr}.method-card{padding:20px;border-radius:20px}}
+
+
+/* One-line layout refinement */
+@media (min-width: 900px){
+  .afr-brand,.afr-tab,.eyebrow,.step-label,.hint,.btn,.field-top,.price,.vendor,.case-tag,.rank,.pill,.meta,.intro-badge,.intro-kicker,.intro-note,.method-badge,.method-var,.formula h4,.stage h4,.risk h4{white-space:nowrap;}
+  .intro-card{width:min(1120px,calc(100% - 40px));}
+  .intro-title{font-size:34px;white-space:nowrap;}
+  .intro-message{white-space:nowrap;font-size:16px;padding:16px 18px;}
+  .intro-message strong{font-size:18px;}
+  .intro-note{font-size:12px;overflow:hidden;text-overflow:ellipsis;}
+  .intro-actions{flex-wrap:nowrap;}
+  .intro-check{white-space:nowrap;}
+  .method-card{width:min(1120px,calc(100% - 40px));}
+  .method-title{font-size:28px;white-space:nowrap;}
+  .method-lead{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .method-callout{font-size:13px;line-height:1.5;}
+  .method-vars{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .method-var{font-size:12.5px;padding:10px 12px;overflow:hidden;text-overflow:ellipsis;}
+  .formula h4{font-size:15px;overflow:hidden;text-overflow:ellipsis;}
+  .formula code{font-size:13px;white-space:nowrap;overflow-x:auto;}
+  .formula p{font-size:12px;}
+  .method-warning{font-size:12px;}
+  .choice h3,.pain h3{white-space:nowrap;font-size:19px;}
+  .choice p,.pain p{font-size:13px;}
+  .tool h3,.case h3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .metric{flex-wrap:nowrap;}
+  .metric strong,.metric span{white-space:nowrap;}
+  .kpi small,.kpi strong{white-space:nowrap;}
+  .stage p{font-size:11.5px;}
+}
+@media (max-width: 899px){
+  .intro-note,.method-lead,.method-var,.formula h4,.formula code{white-space:normal;}
+}
+
+
+/* Export / offline controls */
+.utility-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.utility-btn{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid #d8dce2;background:#fff;color:#344054;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
+.utility-btn:hover{background:#f8fafc;border-color:#bfc5ce}
+.utility-btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.utility-btn.primary:hover{filter:brightness(.96)}
+.utility-help{max-width:1180px;margin:12px auto 0;padding:0 20px;font-size:12px;line-height:1.55;color:#667085;display:none}
+.utility-help.show{display:block}
+.report-only{display:none}
+@media(max-width:1050px){
+  .navin{flex-wrap:wrap;padding:10px 0}
+  .utility-actions{width:100%;justify-content:flex-end}
+}
+@media(max-width:650px){
+  .utility-actions{justify-content:stretch}
+  .utility-btn{flex:1;padding:0 10px;font-size:12px}
+}
+@media print{
+  body{background:#fff!important}
+  .nav,.intro-overlay,.method-overlay,.utility-help,.no-print{display:none!important}
+  .shell{max-width:none!important;padding:0!important}
+  .view{display:none!important}
+  #printReport{display:block!important;padding:0 12mm!important}
+  .report-only{display:block!important}
+  @page{size:A4 portrait;margin:12mm}
+  .report-title{font-size:24pt;color:#000079;margin:0 0 5mm}
+  .report-sub{font-size:10pt;color:#667085;margin-bottom:7mm}
+  .report-section{margin:0 0 7mm;break-inside:avoid}
+  .report-section h2{font-size:15pt;color:#000079;border-bottom:1px solid #d0d5dd;padding-bottom:2mm;margin:0 0 3mm}
+  .report-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3mm}
+  .report-box{border:1px solid #d0d5dd;border-radius:4mm;padding:4mm;break-inside:avoid}
+  .report-box small{display:block;color:#667085;margin-bottom:1mm}
+  .report-box strong{font-size:14pt}
+  .report-list{margin:0;padding-left:5mm}
+  .report-list li{margin:0 0 2mm}
+  .report-note{font-size:9pt;line-height:1.55;color:#475467;background:#f8fafc;border-left:3px solid #F75000;padding:3mm}
+}
+
+
+/* Desktop headline single-line rule */
+@media (min-width: 900px){
+  .display,
+  .title,
+  .section-title,
+  .intro-title,
+  .method-title{
+    white-space: nowrap !important;
+    max-width: none !important;
+  }
+
+  .display{
+    font-size: clamp(34px, 4.6vw, 64px) !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .title,
+  .section-title{
+    font-size: clamp(28px, 3.2vw, 46px) !important;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1180px){
+  .display{
+    font-size: clamp(32px, 4.2vw, 50px) !important;
+  }
+  .title,
+  .section-title{
+    font-size: clamp(27px, 3vw, 38px) !important;
+  }
+}
+
+@media (max-width: 899px){
+  .display,
+  .title,
+  .section-title,
+  .intro-title,
+  .method-title{
+    white-space: normal !important;
+  }
+}
+
+
+/* Refined SVG icons for Diagnose Step 1 & 2 */
+.icon-refined{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:64px;
+  height:64px;
+  margin:0 0 14px;
+}
+.svg-icon{width:52px;height:52px;display:block}
+.svg-icon .icon-frame{
+  fill:#ffffff;
+  stroke:#e5e9f0;
+  stroke-width:1.25;
+}
+.svg-icon .icon-stroke{
+  fill:none;
+  stroke:var(--navy);
+  stroke-width:2.1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.svg-icon .icon-accent-stroke{
+  fill:none;
+  stroke:var(--orange);
+  stroke-width:2.25;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.svg-icon .icon-accent-fill{
+  fill:#fff2ea;
+  stroke:rgba(247,80,0,.18);
+  stroke-width:1;
+}
+
+.choice h3{font-size:20px}
+.choice p{line-height:1.6}
+.diag[data-step="1"] .choice,
+.diag[data-step="2"] .choice{
+  padding:26px 24px 24px;
+  min-height:174px;
+  border-radius:24px;
+}
+.diag[data-step="1"] .grid2,
+.diag[data-step="2"] .grid2{
+  gap:18px;
+}
+.diag[data-step="1"] .choice.selected .icon-refined,
+.diag[data-step="2"] .choice.selected .icon-refined{
+  transform:none;
+}
+.diag[data-step="1"] .choice:hover .icon-refined,
+.diag[data-step="2"] .choice:hover .icon-refined{
+  transform:translateY(-1px);
+  transition:transform .18s ease;
+}
+@media (max-width: 899px){
+  .icon-refined{width:66px;height:66px;border-radius:18px}
+  .svg-icon{width:48px;height:48px}
+  .diag[data-step="1"] .choice,
+  .diag[data-step="2"] .choice{min-height:160px;padding:22px}
+}
+
+
+/* Hover-only helper for utility buttons */
+.utility-actions{position:relative}
+.utility-btn{position:relative}
+.utility-btn[data-tip]::after{
+  content:attr(data-tip);
+  position:absolute;
+  top:calc(100% + 10px);
+  right:0;
+  width:max-content;
+  max-width:430px;
+  padding:10px 12px;
+  border-radius:10px;
+  background:#101828;
+  color:#fff;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.45;
+  white-space:normal;
+  box-shadow:0 8px 24px rgba(16,24,40,.18);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-4px);
+  transition:opacity .16s ease, transform .16s ease, visibility .16s;
+  pointer-events:none;
+  z-index:1000;
+}
+.utility-btn[data-tip]::before{
+  content:"";
+  position:absolute;
+  top:calc(100% + 4px);
+  right:20px;
+  border:6px solid transparent;
+  border-bottom-color:#101828;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .16s ease, visibility .16s;
+}
+.utility-btn[data-tip]:hover::after,
+.utility-btn[data-tip]:focus-visible::after,
+.utility-btn[data-tip]:hover::before,
+.utility-btn[data-tip]:focus-visible::before{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+.feature-hidden{display:none!important}
+
+
+/* Cohesive first-visit modal redesign */
+.intro-card-cohesive{
+  position:relative;
+  width:min(820px,calc(100% - 32px));
+  padding:0;
+  overflow:hidden;
+  border-radius:30px;
+  border:1px solid rgba(0,0,121,.08);
+  border-top:0;
+  background:#fff;
+  box-shadow:0 34px 90px rgba(15,23,42,.24);
+}
+.intro-card-cohesive::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:6px;
+  background:linear-gradient(180deg,var(--orange),var(--navy));
+}
+.intro-content{
+  padding:38px 42px 30px 46px;
+}
+.intro-close-floating{
+  position:absolute;
+  top:18px;
+  right:18px;
+  z-index:2;
+}
+.intro-card-cohesive .intro-badge{
+  display:inline-flex;
+  margin:0 0 28px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:#f2f4f7;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:.02em;
+}
+.intro-main{
+  margin-bottom:28px;
+}
+.intro-card-cohesive .intro-kicker{
+  margin:0 0 8px;
+  color:var(--orange);
+  font-size:13px;
+  font-weight:850;
+  letter-spacing:.08em;
+}
+.intro-card-cohesive .intro-title{
+  margin:0;
+  font-size:clamp(34px,5vw,48px);
+  line-height:1.06;
+  letter-spacing:-.04em;
+  color:#111827;
+}
+.intro-desc{
+  margin:16px 0 0;
+  max-width:660px;
+  color:#667085;
+  font-size:16px;
+  line-height:1.7;
+}
+.intro-benefits{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin:0 0 28px;
+}
+.intro-benefit{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-height:52px;
+  padding:0 14px;
+  border-radius:14px;
+  background:#f8fafc;
+  border:1px solid #eef0f3;
+}
+.intro-benefit span{
+  color:var(--orange);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.intro-benefit b{
+  color:#344054;
+  font-size:13px;
+  white-space:nowrap;
+}
+.intro-action-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding-top:4px;
+}
+.intro-primary{
+  min-width:210px;
+}
+.intro-card-cohesive .intro-note{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid #eef0f3;
+  color:#98a2b3;
+  font-size:11.5px;
+  line-height:1.5;
+  white-space:nowrap;
+}
+@media(max-width:760px){
+  .intro-content{padding:32px 24px 24px 28px}
+  .intro-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .intro-action-row{align-items:stretch;flex-direction:column-reverse}
+  .intro-primary{width:100%}
+  .intro-card-cohesive .intro-note{white-space:normal}
+}
+
+
+/* Icon cleanup: show the symbol only, no surrounding SVG frame */
+.svg-icon .icon-frame{display:none!important;}
+.icon-refined{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;}
+
+/* First-visit modal: simplified typography hierarchy */
+.intro-simple-card{position:relative;width:min(760px,calc(100% - 36px));padding:0;border:0;border-radius:26px;background:#fff;box-shadow:0 28px 80px rgba(15,23,42,.22);overflow:hidden}
+.intro-simple-card::before{content:"";display:block;height:5px;background:var(--orange)}
+.intro-simple-content{padding:34px 38px 28px}
+.intro-simple-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:#98a2b3;font-size:27px;line-height:1;cursor:pointer}
+.intro-simple-close:hover{background:#f2f4f7;color:#475467}
+.intro-simple-label{font-size:14px;line-height:1.4;font-weight:800;color:var(--navy);margin:0 0 13px}
+.intro-simple-title{font-size:36px!important;line-height:1.15!important;letter-spacing:-.025em!important;font-weight:850;margin:0!important;color:#111827;white-space:nowrap!important}
+.intro-simple-desc{font-size:15px;line-height:1.7;color:#667085;margin:15px 0 20px}
+.intro-simple-benefits{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid #eef0f3;border-bottom:1px solid #eef0f3;color:#344054;font-size:14px;font-weight:750;white-space:nowrap}
+.intro-simple-benefits i{display:block;width:4px;height:4px;border-radius:50%;background:#d0d5dd;flex:0 0 auto}
+.intro-simple-actions{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:22px}
+.intro-simple-actions .intro-check{font-size:13px;color:#667085;white-space:nowrap}
+.intro-simple-actions .intro-primary{min-width:210px}
+.intro-simple-note{font-size:11.5px;line-height:1.5;color:#98a2b3;margin-top:18px;white-space:nowrap}
+@media(max-width:760px){.intro-simple-content{padding:30px 24px 24px}.intro-simple-title{font-size:30px!important;white-space:normal!important}.intro-simple-benefits{flex-wrap:wrap;white-space:normal}.intro-simple-actions{flex-direction:column-reverse;align-items:stretch}.intro-simple-actions .intro-primary{width:100%}.intro-simple-note{white-space:normal}}
+
+
+/* Mobile optimization */
+@media (max-width: 899px){
+  html,body{overflow-x:hidden}
+  body{-webkit-text-size-adjust:100%}
+  .shell{padding:0 16px 48px}
+  .nav{margin:0 -16px;padding:0 16px}
+  .navin{
+    min-height:auto;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:10px;
+    padding:12px 0;
+  }
+  .brand{font-size:14px}
+  .tabs{
+    width:100%;
+    gap:8px;
+    overflow:auto;
+    padding-bottom:2px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:0 0 auto;
+    font-size:13px;
+    padding:10px 12px;
+  }
+  .utility-actions{
+    width:100%;
+    margin-left:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .utility-btn{
+    width:100%;
+    min-height:44px;
+    padding:0 10px;
+    font-size:12px;
+  }
+
+  .view{padding-top:28px}
+  .hero{padding:28px 0 20px}
+  .eyebrow{font-size:12px;margin-bottom:10px}
+  .display{
+    font-size:clamp(28px,8.2vw,38px) !important;
+    line-height:1.12;
+    letter-spacing:-.03em;
+    max-width:none;
+    white-space:normal !important;
+  }
+  .lead{
+    font-size:15px;
+    line-height:1.7;
+    margin-top:14px;
+    max-width:none;
+  }
+  .title,.section-title{
+    font-size:clamp(24px,7.2vw,30px) !important;
+    line-height:1.18;
+    white-space:normal !important;
+    margin-bottom:8px;
+  }
+  .sub,.section-sub{font-size:15px;line-height:1.7;margin-bottom:20px;max-width:none}
+
+  .grid2,.grid3,.recs,.kpis,.case-grid,.tool-list,.risk-grid,.timeline,.formula-grid,.method-vars{
+    grid-template-columns:1fr !important;
+  }
+  .result-hero,.roi-grid{grid-template-columns:1fr !important;gap:16px}
+
+  .choice,.pain,.panel,.case,.tool,.kpi,.risk,.stage,.score,.formula,.method-callout,.method-warning{
+    border-radius:20px;
+  }
+  .choice,.pain{
+    min-height:auto;
+    padding:20px;
+  }
+  .choice h3,.pain h3{
+    font-size:18px;
+    white-space:normal;
+  }
+  .choice p,.pain p{
+    font-size:13px;
+    line-height:1.6;
+  }
+  .icon-refined{
+    width:56px;
+    height:56px;
+    margin-bottom:12px;
+  }
+  .svg-icon{width:46px;height:46px}
+
+  .actions,.intro-action-row,.method-footer{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .btn{
+    width:100%;
+    min-height:46px;
+    justify-content:center;
+  }
+  .progress-wrap{gap:8px;margin:20px 0 10px}
+  .step-label{font-size:12px}
+
+  .score strong{font-size:46px}
+  .kpi strong{font-size:26px}
+  .field-top{font-size:13px}
+  .metric{
+    flex-direction:column;
+    gap:6px;
+    align-items:flex-start;
+  }
+  .metric strong,.metric span{
+    white-space:normal;
+  }
+  .tool-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .price{margin-top:4px}
+  .tool h3,.case h3{white-space:normal}
+  .tool-meta{gap:6px}
+  .meta,.pill{font-size:11px}
+
+  .intro-overlay,.method-overlay{padding:12px}
+  .intro-card-cohesive,
+  .intro-card,
+  .method-card{
+    width:100% !important;
+    max-width:none !important;
+    border-radius:22px;
+  }
+  .intro-content{
+    padding:28px 20px 22px 24px;
+  }
+  .intro-close-floating,
+  .intro-close,
+  .method-close{
+    top:12px;
+    right:12px;
+    width:40px;
+    height:40px;
+  }
+  .intro-card-cohesive .intro-badge,
+  .method-badge{
+    font-size:11px;
+  }
+  .intro-card-cohesive .intro-title,
+  .method-title{
+    font-size:clamp(28px,7.8vw,34px) !important;
+    line-height:1.12;
+    white-space:normal !important;
+  }
+  .intro-desc,
+  .method-lead{
+    font-size:14px;
+    line-height:1.65;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+  .intro-benefits{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:20px;
+  }
+  .intro-benefit{
+    min-height:48px;
+    padding:0 12px;
+  }
+  .intro-benefit b{font-size:12px}
+  .intro-note{
+    font-size:11px !important;
+    line-height:1.55;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+  .method-card{
+    padding:18px;
+    max-height:90vh;
+  }
+  .method-callout,
+  .method-var,
+  .formula p,
+  .method-warning{
+    font-size:12px;
+    line-height:1.65;
+    white-space:normal;
+  }
+  .formula h4{
+    font-size:15px;
+    white-space:normal;
+  }
+  .formula code{
+    font-size:12px;
+    white-space:normal;
+    word-break:break-word;
+  }
+
+  .report-grid{grid-template-columns:1fr}
+  .report-box strong{font-size:13pt}
+}
+
+
+/* Mobile app-like experience */
+@media (max-width: 899px){
+  body{
+    background:#f5f7fb;
+    padding-bottom:86px;
+  }
+  .shell{
+    padding:0 14px 34px;
+  }
+
+  /* App header */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    margin:0 -14px;
+    padding:10px 14px 8px;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(18px);
+    box-shadow:0 1px 0 rgba(15,23,42,.06);
+  }
+  .navin{
+    display:block;
+    padding:0;
+  }
+  .brand{
+    font-size:15px;
+    font-weight:900;
+    color:var(--navy);
+    padding:2px 2px 10px;
+  }
+
+  /* Hide top text tabs on mobile, use bottom app nav instead */
+  .tabs{
+    display:none !important;
+  }
+  .utility-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:0;
+  }
+  .utility-btn{
+    min-height:42px;
+    border-radius:14px;
+    font-size:12px;
+    font-weight:850;
+    box-shadow:none;
+  }
+
+  /* App content cards */
+  .view{
+    padding-top:20px;
+  }
+  .hero{
+    padding:16px 2px 16px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#fff2ea;
+    color:var(--orange);
+    font-size:11px;
+    letter-spacing:.05em;
+    margin-bottom:12px;
+  }
+  .display{
+    font-size:clamp(30px,8.5vw,38px) !important;
+    line-height:1.1;
+    margin-bottom:0;
+  }
+  .lead{
+    font-size:14px;
+    line-height:1.65;
+    margin-top:12px;
+    color:#667085;
+  }
+
+  .progress-wrap{
+    position:sticky;
+    top:103px;
+    z-index:25;
+    background:#f5f7fb;
+    margin:0 -2px 14px;
+    padding:10px 2px 8px;
+  }
+  .progress{
+    height:8px;
+    background:#e7eaf0;
+  }
+
+  .diag-step,
+  .diag{
+    background:#fff;
+    border-radius:24px;
+    padding:20px;
+    box-shadow:0 8px 28px rgba(15,23,42,.06);
+    border:1px solid #edf0f4;
+  }
+
+  .title,.section-title{
+    font-size:25px !important;
+    line-height:1.18;
+    margin-bottom:8px;
+  }
+  .sub,.section-sub{
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:18px;
+  }
+
+  .grid2,.grid3{
+    gap:12px !important;
+  }
+
+  .choice,.pain{
+    position:relative;
+    display:grid;
+    grid-template-columns:58px 1fr;
+    grid-template-areas:
+      "icon title"
+      "icon desc";
+    column-gap:14px;
+    align-items:center;
+    padding:16px;
+    min-height:104px;
+    border-radius:18px;
+    background:#fff;
+    border:1px solid #e4e7ec;
+    box-shadow:none;
+  }
+  .choice:active,.pain:active{
+    transform:scale(.99);
+  }
+  .choice.selected,.pain.selected{
+    border:2px solid var(--orange);
+    background:#fffaf7;
+    box-shadow:0 0 0 4px rgba(247,80,0,.05);
+  }
+  .choice .icon-refined,.pain .icon-refined,
+  .choice>.icon,.pain>.icon{
+    grid-area:icon;
+    margin:0;
+    width:54px;
+    height:54px;
+  }
+  .choice h3,.pain h3{
+    grid-area:title;
+    font-size:17px;
+    margin:0 0 4px;
+    line-height:1.3;
+  }
+  .choice p,.pain p{
+    grid-area:desc;
+    font-size:12.5px;
+    line-height:1.5;
+    margin:0;
+  }
+
+  .hint{
+    margin-top:14px;
+    font-size:12px;
+    text-align:center;
+  }
+
+  .actions{
+    position:sticky;
+    bottom:78px;
+    z-index:20;
+    background:linear-gradient(180deg,rgba(255,255,255,0),#fff 28%);
+    padding-top:18px;
+    margin-top:18px;
+    gap:10px;
+  }
+  .actions .btn{
+    min-height:50px;
+    border-radius:16px;
+    font-size:15px;
+  }
+
+  /* Result cards */
+  .result-hero{
+    gap:14px;
+  }
+  .score{
+    border-radius:20px;
+    padding:20px;
+  }
+  .score strong{
+    font-size:44px;
+  }
+  .recs{
+    gap:12px;
+    margin-top:18px;
+  }
+  .rec{
+    background:#fff;
+    border:1px solid #e4e7ec;
+    border-radius:18px;
+    padding:16px;
+  }
+
+  /* ROI */
+  .roi-grid{
+    gap:14px;
+  }
+  .panel{
+    padding:18px;
+    border-radius:20px;
+    box-shadow:0 8px 28px rgba(15,23,42,.05);
+  }
+  .kpis{
+    gap:10px;
+  }
+  .kpi{
+    padding:16px;
+    border-radius:18px;
+  }
+  .kpi strong{
+    font-size:23px;
+  }
+
+  /* Tools */
+  .tools-top{
+    position:sticky;
+    top:105px;
+    z-index:24;
+    background:#f5f7fb;
+    padding:8px 0 10px;
+    margin-bottom:10px;
+  }
+  .search,.select{
+    width:100%;
+    min-width:0;
+    border-radius:14px;
+  }
+  .tool-list,.case-grid{
+    gap:12px;
+  }
+  .tool,.case{
+    border-radius:20px;
+    padding:17px;
+    box-shadow:0 6px 22px rgba(15,23,42,.04);
+  }
+
+  /* Guide */
+  .timeline{
+    gap:10px;
+  }
+  .stage{
+    background:#fff;
+    border-radius:18px;
+    border:1px solid #e4e7ec;
+    padding:16px;
+    border-top:4px solid var(--navy);
+  }
+  .risk-grid{
+    gap:10px;
+  }
+
+  /* First-load modal as bottom sheet */
+  .intro-overlay{
+    align-items:flex-end;
+    padding:0;
+  }
+  .intro-card-cohesive,
+  .intro-card{
+    width:100% !important;
+    border-radius:28px 28px 0 0 !important;
+    max-height:88vh;
+    overflow:auto;
+    transform:translateY(30px);
+  }
+  .intro-overlay.show .intro-card-cohesive,
+  .intro-overlay.show .intro-card{
+    transform:translateY(0);
+  }
+  .intro-card-cohesive::after{
+    content:"";
+    display:block;
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:42px;
+    height:5px;
+    border-radius:999px;
+    background:#d0d5dd;
+  }
+  .intro-content{
+    padding:34px 20px 24px;
+  }
+  .intro-benefits{
+    grid-template-columns:1fr 1fr;
+  }
+  .intro-action-row{
+    position:sticky;
+    bottom:0;
+    background:#fff;
+    padding-top:10px;
+  }
+
+  /* Formula modal as bottom sheet */
+  .method-overlay{
+    align-items:flex-end;
+    padding:0;
+  }
+  .method-card{
+    width:100% !important;
+    max-height:90vh;
+    border-radius:26px 26px 0 0 !important;
+    padding:20px 18px 24px;
+  }
+
+  /* Bottom app navigation */
+  .mobile-app-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:60;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:2px;
+    padding:8px 8px calc(8px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(18px);
+    border-top:1px solid #e7eaf0;
+    box-shadow:0 -8px 24px rgba(15,23,42,.06);
+  }
+  .mobile-app-tab{
+    border:0;
+    background:transparent;
+    border-radius:14px;
+    min-height:52px;
+    padding:6px 4px;
+    color:#667085;
+    font-size:10.5px;
+    font-weight:800;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+  }
+  .mobile-app-tab .micon{
+    width:22px;
+    height:22px;
+    display:block;
+  }
+  .mobile-app-tab.active{
+    background:#f0f1ff;
+    color:var(--navy);
+  }
+}
+@media (min-width:900px){
+  .mobile-app-nav{display:none}
+}
+
+
+.action-toast{
+  position:fixed;left:50%;bottom:28px;z-index:20000;
+  transform:translate(-50%,16px);
+  background:#101828;color:#fff;
+  padding:11px 16px;border-radius:999px;
+  font-size:13px;font-weight:800;
+  box-shadow:0 12px 30px rgba(16,24,40,.2);
+  opacity:0;visibility:hidden;
+  transition:.2s ease;white-space:nowrap
+}
+.action-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media(max-width:899px){.action-toast{bottom:92px;max-width:calc(100% - 28px);white-space:normal;text-align:center}}
+
+
+.risk h4{font-weight:850}
+@media(max-width:899px){
+  .risk{padding:18px}
+  .risk .icon{font-size:28px;margin-bottom:8px}
+  .risk h4{font-size:17px;line-height:1.35}
+  .risk p{font-size:13px;line-height:1.65}
+}
+
+
+/* Keep the main diagnosis intro sentence on one line on desktop */
+@media (min-width: 900px){
+  .hero-lead-nowrap{
+    white-space:nowrap !important;
+    max-width:none !important;
+    font-size:clamp(14px,1.55vw,18px) !important;
+  }
+}
+@media (max-width: 899px){
+  .hero-lead-nowrap{
+    white-space:normal !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="intro-overlay" id="introModal" role="dialog" aria-modal="true" aria-labelledby="introTitle" aria-describedby="introDesc">
+  <div class="intro-card intro-simple-card">
+    <button class="intro-close intro-simple-close" id="introClose" type="button" aria-label="關閉">×</button>
+    <div class="intro-simple-content">
+      <div class="intro-simple-label">AI 財務導入診斷 ・ 約 3 分鐘</div>
+      <h2 class="intro-simple-title" id="introTitle">先找問題，再找工具</h2>
+      <p class="intro-simple-desc" id="introDesc">不用上傳財報，回答幾個日常經營問題，就能快速找到最值得先改善的方向。</p>
+      <div class="intro-simple-benefits">
+        <span>導入方向</span><i></i><span>工具建議</span><i></i><span>ROI 試算</span><i></i><span>下一步行動</span>
+      </div>
+      <div class="intro-simple-actions">
+        <label class="intro-check"><input type="checkbox" id="introNoShow"> 下次不再顯示</label>
+        <button class="btn orange intro-primary" type="button" id="introStart">開始 3 分鐘診斷 →</button>
+      </div>
+      <div class="intro-simple-note">※ 本工具依使用者填寫情境進行初步診斷，結果僅供導入評估參考，實際效益仍依企業流程、資料品質與導入情況而異。</div>
+    </div>
+  </div>
+</div>
+<div class="method-overlay" id="methodologyModal" role="dialog" aria-modal="true" aria-labelledby="methodTitle">
+  <div class="method-card">
+    <div class="method-head">
+      <span class="method-badge">Methodology｜計算邏輯</span>
+      <button class="method-close" id="methodClose" type="button" aria-label="關閉">×</button>
+    </div>
+    <h2 class="method-title" id="methodTitle">AI 財務工具工時價值與回收期怎麼算？</h2>
+    <p class="method-lead">本試算模型依循企業生產力管理之「可釋放人力工時價值估算」邏輯，量化 AI 自動化所釋放的人力工時價值，並進一步推估投資回報與成本回收速度。</p>
+
+    <div class="method-callout">
+      <strong>2026 年台灣最低工資基準</strong><br>
+      自 2026 年 1 月 1 日起：每月最低工資 <b>NT$29,500</b>；每小時最低工資 <b>NT$196</b>。<br>
+      <span style="font-size:13px;color:#667085">注意：月薪制與時薪制是不同計薪制度，不能直接用 29,500 ÷ 某個固定時數去宣稱等於法定最低時薪。</span>
+    </div>
+
+    <h3 style="color:var(--navy);margin:20px 0 10px">一、5 個輸入變數</h3>
+    <div class="method-vars">
+      <div class="method-var"><b>N｜財會人員數</b><br>實際參與登打、對帳、報表整理等作業的人數。</div>
+      <div class="method-var"><b>S｜平均月薪</b><br>參與人員的平均每月薪資；預設不得低於 2026 月最低工資 NT$29,500。</div>
+      <div class="method-var"><b>H｜每月人工工時</b><br>每人每月花在可被自動化工作上的時間。</div>
+      <div class="method-var"><b>E｜預期工時減省率</b><br>AI 導入後預估可減少的人工比例；建議以實際 PoC 結果調整。</div>
+      <div class="method-var"><b>C｜年度 AI 成本</b><br>軟體授權、模組或年度服務費；若有一次性導入費，正式評估時應另外納入。</div>
+    </div>
+
+    <h3 style="color:var(--navy);margin:22px 0 10px">二、4 個核心公式</h3>
+    <div class="formula-grid">
+      <div class="formula">
+        <h4>1. 工時價值換算 R</h4>
+        <code>R = (S × 12) ÷ 2,080</code>
+        <p>以台灣法定正常工時「每週 40 小時」換算全年 52 週，共約 2,080 小時，作為生產力價值的簡化基準。這不是加班費計算公式，也不是用來判斷最低工資是否合法。</p>
+      </div>
+      <div class="formula orange">
+        <h4>2. 全團隊年可釋放工時 H_saved</h4>
+        <code>H_saved = N × H × (E ÷ 100) × 12</code>
+        <p>把每人每月可減少的重複作業工時，換算成全團隊一年可釋放的時間。</p>
+      </div>
+      <div class="formula green">
+        <h4>3. 年化可釋放人力價值 V_saving</h4>
+        <code>V_saving = H_saved × R</code>
+        <p>用可釋放工時乘以平均工時價值，估算這些時間的內部生產力價值。</p>
+      </div>
+      <div class="formula red">
+        <h4>4. 工時價值 ROI 與估算回收期</h4>
+        <code>ROI = [(V_saving - C) ÷ C] × 100%<br>回收期(月) = C ÷ (V_saving ÷ 12)</code>
+        <p>代表工具支出多久能被可釋放工時的等值生產力抵回。若要做「會計帳面現金 ROI」，需再納入實際減少的人事支出、委外費、錯帳損失等現金項目。</p>
+      </div>
+    </div>
+
+    <div class="method-warning">
+      <b>顧問補充｜生產力價值 ≠ 一定省下同額現金</b><br>
+      例如 AI 每年釋放 500 小時，不代表公司一定少付 500 小時薪資；更常見的是把這些時間移去做催收、分析、預算、管理報表等更高價值工作。因此此處呈現為「工時價值 ROI」。正式投資評估可再另算「現金 ROI」。<br><br>
+      <b>最低時薪 196 元的用途：</b>若企業採時薪人員，可直接用實際時薪，且不得低於 NT$196；若是月薪制人員，本模型以實際月薪及全年正常工時換算，不把 196 元硬套為月薪制的時薪。
+    </div>
+
+    <div class="method-footer">
+      <button class="btn alt" id="methodClose2" type="button">關閉</button>
+      <button class="btn orange" id="methodBack" type="button">立即回到試算</button>
+    </div>
+  </div>
+</div>
+<div class="shell" id="app">
+<div class="nav"><div class="navin"><div class="brand">AI 財務工具互動指引</div><div class="tabs">
+<button class="tab active" data-view="diagnose">幫我找工具</button>
+<button class="tab" data-view="roi">算算能省多少</button>
+<button class="tab" data-view="tools">有哪些工具</button>
+<button class="tab feature-hidden" data-view="cases" data-feature="cases">看看案例</button>
+<button class="tab" data-view="guide">怎麼導入</button>
+</div>
+<div class="utility-actions no-print">
+  <button class="utility-btn" type="button" id="downloadOffline" onclick="return window.downloadOfflineFile ? (window.downloadOfflineFile(), false) : false;" data-tip="💾 離線互動檔：儲存完整互動軟體檔案，免連網也能隨時離線操作與分享同仁。">💾 下載離線檔 (.html)</button>
+  <button class="utility-btn primary" type="button" id="exportReport" onclick="return window.exportCurrentReport ? (window.exportCurrentReport(), false) : false;" data-tip="📄 匯出報告：將目前診斷結果與 ROI 試算整理成 A4 報告，可在列印視窗選擇「另存為 PDF」。">📄 匯出報告</button>
+</div></div></div>
+
+<section class="view active" data-panel="diagnose">
+<div class="hero"><div class="eyebrow">3 分鐘企業健檢</div><h1 class="display">你的公司，最適合從哪裡開始用 AI？</h1><p class="lead hero-lead-nowrap">不用懂 AI，也不用先研究軟體。回答幾個每天會遇到的問題，我們幫你找出最值得先改善的地方。</p></div>
+<div class="progress-wrap"><div class="progress"><span id="progress"></span></div><div class="step-label" id="stepLabel">準備開始</div></div>
+<div class="diag active" data-step="0"><div class="actions"><button class="btn orange" id="start">開始看看 →</button></div></div>
+<div class="diag" data-step="1"><h2 class="title">你的公司比較接近哪一種？</h2><p class="sub">點一下就好，後面的情境會跟著調整。</p><div class="grid2"><button class="choice industry" data-value="manufacturing">
+<span class="icon icon-refined" aria-hidden="true">
+<svg viewBox="0 0 72 72" class="svg-icon" role="img">
+  <rect x="8" y="14" width="56" height="44" rx="16" class="icon-frame"></rect>
+  <path d="M21 46V34l10 5v-7l11 6v-8l11 6v10" class="icon-stroke"></path>
+  <path d="M18 48h36M20 54h34" class="icon-stroke"></path>
+  <path d="M49 24v-7h8v18" class="icon-stroke"></path>
+  <circle cx="57" cy="47" r="5.5" class="icon-accent-fill"></circle>
+  <path d="M57 43.8v6.4M53.8 47h6.4" class="icon-accent-stroke"></path>
+</svg>
+</span><h3>製造業</h3><p>生產、加工、物料、庫存、供應鏈為主</p></button><button class="choice industry" data-value="service">
+<span class="icon icon-refined" aria-hidden="true">
+<svg viewBox="0 0 72 72" class="svg-icon" role="img">
+  <rect x="8" y="14" width="56" height="44" rx="16" class="icon-frame"></rect>
+  <path d="M18 28h36l-2 8a4 4 0 0 1-4 3H24a4 4 0 0 1-4-3l-2-8Z" class="icon-stroke"></path>
+  <path d="M22 28v-6h28v6M24 52V39h24v13M29 52V43h7v9M41 44h7" class="icon-stroke"></path>
+  <circle cx="54" cy="48" r="5.5" class="icon-accent-fill"></circle>
+  <path d="M54 44.5v7M50.5 48h7" class="icon-accent-stroke"></path>
+</svg>
+</span><h3>服務業</h3><p>餐飲、零售、門市、專業服務或平台型態</p></button></div><div class="actions"><button class="btn alt back">← 返回</button></div></div>
+<div class="diag" data-step="2"><h2 class="title">你們現在怎麼管帳？</h2><p class="sub">選最接近的就好，不需要完全符合。</p><div class="grid2"><button class="choice mode" data-value="outsourced">
+<span class="icon icon-refined" aria-hidden="true">
+<svg viewBox="0 0 72 72" class="svg-icon" role="img">
+  <rect x="8" y="14" width="56" height="44" rx="16" class="icon-frame"></rect>
+  <rect x="21" y="22" width="20" height="28" rx="4" class="icon-stroke"></rect>
+  <path d="M26 28h10M26 34h10M26 40h7" class="icon-stroke"></path>
+  <circle cx="50" cy="31" r="7.5" class="icon-accent-fill"></circle>
+  <path d="M46.5 31.2l2.2 2.3 4.7-5.2" class="icon-accent-stroke"></path>
+  <path d="M46 47c1.8-3.8 7.9-3.8 9.7 0" class="icon-stroke"></path>
+  <circle cx="50.9" cy="42.2" r="2.8" class="icon-stroke"></circle>
+</svg>
+</span><h3>都交給記帳士</h3><p>公司自己只有簡單收支、訂單或 Excel</p></button><button class="choice mode" data-value="excel">
+<span class="icon icon-refined" aria-hidden="true">
+<svg viewBox="0 0 72 72" class="svg-icon" role="img">
+  <rect x="8" y="14" width="56" height="44" rx="16" class="icon-frame"></rect>
+  <rect x="20" y="22" width="31" height="28" rx="4" class="icon-stroke"></rect>
+  <path d="M30.5 22v28M40.5 22v28M20 31h31M20 40h31" class="icon-stroke"></path>
+  <path d="M24.5 28.5l4 5 4-5M24.5 43.5l4-5 4 5" class="icon-accent-stroke"></path>
+  <path d="M56 27v22M52 44l4-4 4 4" class="icon-stroke"></path>
+</svg>
+</span><h3>主要靠 Excel</h3><p>收支、應收應付、報表大多自己整理</p></button><button class="choice mode" data-value="software">
+<span class="icon icon-refined" aria-hidden="true">
+<svg viewBox="0 0 72 72" class="svg-icon" role="img">
+  <rect x="8" y="14" width="56" height="44" rx="16" class="icon-frame"></rect>
+  <rect x="18" y="23" width="36" height="22" rx="4" class="icon-stroke"></rect>
+  <path d="M22 49h28M28 52h16" class="icon-stroke"></path>
+  <path d="M24 30h10M24 35h16M43 29l3 3 5-6" class="icon-accent-stroke"></path>
+  <circle cx="54" cy="47" r="5.5" class="icon-accent-fill"></circle>
+  <path d="M51.5 47h5M54 44.5v5" class="icon-accent-stroke"></path>
+</svg>
+</span><h3>已有財會系統</h3><p>但輸入、對帳或分析還有不少人工工作</p></button><button class="choice mode" data-value="integrated">
+<span class="icon icon-refined" aria-hidden="true">
+<svg viewBox="0 0 72 72" class="svg-icon" role="img">
+  <rect x="8" y="14" width="56" height="44" rx="16" class="icon-frame"></rect>
+  <rect x="19" y="25" width="12" height="12" rx="3" class="icon-stroke"></rect>
+  <rect x="41" y="25" width="12" height="12" rx="3" class="icon-stroke"></rect>
+  <rect x="30" y="40" width="12" height="12" rx="3" class="icon-stroke"></rect>
+  <path d="M31 31h10M25 37l9 7M47 37l-9 7" class="icon-stroke"></path>
+  <circle cx="55" cy="47" r="5.5" class="icon-accent-fill"></circle>
+  <path d="M52.5 47h5M55 44.5v5" class="icon-accent-stroke"></path>
+</svg>
+</span><h3>ERP / POS 都有了</h3><p>現在更想提升預測、分析與自動化</p></button></div><div class="hint">背後會自動對應四種財會管理模式。</div><div class="actions"><button class="btn alt back">← 返回</button></div></div>
+<div class="diag" data-step="3"><h2 class="title">最近哪幾件事最讓你頭痛？</h2><p class="sub">最多選 3 個。我們會優先排出「先做哪件最有感」。</p><div class="grid3"><button class="pain" data-pain="ocr"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><path d="M22 14h22l10 10v34H22z" class="icon-stroke"></path><path d="M44 14v12h12M28 35h20M28 43h15" class="icon-stroke"></path><path d="M50 49l4 4 7-9" class="icon-accent-stroke"></path></svg></span><h3>一直人工輸入</h3><p>發票、PDF、收據還要一筆一筆登打</p></button><button class="pain" data-pain="expense"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><path d="M24 14h24v44l-4-3-4 3-4-3-4 3-4-3-4 3z" class="icon-stroke"></path><path d="M30 25h12M30 33h12M30 41h8" class="icon-stroke"></path><circle cx="50" cy="45" r="6" class="icon-accent-fill"></circle><path d="M47 45h6M50 42v6" class="icon-accent-stroke"></path></svg></span><h3>報銷很麻煩</h3><p>收據、核對、簽核常常卡住</p></button><button class="pain" data-pain="reconcile"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><rect x="20" y="14" width="32" height="44" rx="6" class="icon-stroke"></rect><path d="M26 22h20v8H26zM27 38h4M35 38h4M43 38h4M27 46h4M35 46h4M43 46h4" class="icon-stroke"></path><path d="M27 54h12" class="icon-accent-stroke"></path></svg></span><h3>月底對帳很久</h3><p>銀行、帳務、交易資料要人工核對</p></button><button class="pain" data-pain="cashflow"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><path d="M26 20c3 3 17 3 20 0l5 11c6 12 3 26-15 26S15 43 21 31z" class="icon-stroke"></path><path d="M31 18h10M36 29v18M42 34c-1.4-2.1-3.6-3-6-3-3.2 0-6 1.6-6 4.5 0 6.5 13 2.6 13 9 0 3-2.9 5-6.7 5-2.7 0-5.2-.9-7-2.8" class="icon-accent-stroke"></path></svg></span><h3>不知道錢夠不夠</h3><p>現金流要等人整理才看得到</p></button><button class="pain manu" data-pain="inventory"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><path d="M18 27l18-10 18 10v24L36 61 18 51z" class="icon-stroke"></path><path d="M18 27l18 10 18-10M36 37v24M28 22l18 10" class="icon-stroke"></path><path d="M48 45l4 4 7-9" class="icon-accent-stroke"></path></svg></span><h3>庫存抓不準</h3><p>怕缺貨，也怕囤太多</p></button><button class="pain manu" data-pain="procurement"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><path d="M14 24h30v23H14zM44 32h9l7 8v7H44z" class="icon-stroke"></path><circle cx="26" cy="51" r="5" class="icon-stroke"></circle><circle cx="52" cy="51" r="5" class="icon-stroke"></circle><path d="M20 31h16M20 38h12" class="icon-accent-stroke"></path></svg></span><h3>採購太靠人工</h3><p>詢價、比價、下單都靠人追</p></button><button class="pain serv" data-pain="multisite"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><path d="M18 29h36v29H18zM16 29l4-12h32l4 12" class="icon-stroke"></path><path d="M22 29v7M30 29v7M38 29v7M46 29v7M24 43h9v15M40 43h8" class="icon-stroke"></path><path d="M51 48h10M56 43v10" class="icon-accent-stroke"></path></svg></span><h3>多店資料很分散</h3><p>各店損益要花時間彙整</p></button><button class="pain serv" data-pain="decision"><span class="icon icon-refined" aria-hidden="true"><svg viewBox="0 0 72 72" class="svg-icon"><path d="M17 55V18M17 55h40" class="icon-stroke"></path><path d="M24 46l9-10 8 6 13-17" class="icon-accent-stroke"></path><path d="M48 25h6v6" class="icon-accent-stroke"></path></svg></span><h3>想看數字還要等</h3><p>主管要分析時還要整理 Excel</p></button></div><div class="hint" id="painCount">請選 1～3 個</div><div class="actions"><button class="btn alt back">← 返回</button><button class="btn orange" id="resultBtn" disabled>看看結果 →</button></div></div>
+<div class="diag" data-step="4"><div class="result-hero"><div><div class="eyebrow" id="profile">你的企業輪廓</div><h2 class="title" id="resultTitle">找到你的優先方向了。</h2><p class="sub" id="resultDesc"></p></div><div class="score"><small>AI 導入準備度</small><strong id="scoreNum">55</strong><div id="scoreLabel">適合從小工具開始</div><div class="scorebar"><span id="scoreFill" style="width:55%"></span></div></div></div><div class="recs" id="recGrid"></div><div class="actions"><button class="btn alt" id="restart">重新測一次</button><button class="btn" id="goTools">看看適合的工具 →</button></div></div>
+</section>
+
+<section class="view" data-panel="roi"><div class="hero"><div class="eyebrow">互動試算</div><h1 class="display">如果少做一點重複工作，一年可以省多少？</h1><p class="lead">調整人數、薪資、人工工時、效率提升與軟體成本，即時估算節省工時、年化效益、ROI 與回本時間。</p>
+<div class="actions" style="margin-top:20px">
+  <button class="btn alt" type="button" id="methodologyBtn">📐 這個數字怎麼算？</button>
+  <span style="align-self:center;font-size:13px;color:#667085">2026 台灣最低工資：月薪 NT$29,500／時薪 NT$196</span>
+</div></div><div class="roi-grid"><div class="panel">
+<div class="field"><div class="field-top"><span>財會人員</span><b id="staffLabel">2 人</b></div><input id="staff" type="range" min="1" max="20" value="2"></div>
+<div class="field"><div class="field-top"><span>平均月薪</span><b id="salaryLabel">NT$ 45,000</b></div><input id="salary" type="range" min="29500" max="120000" step="500" value="45000"></div>
+<div class="field"><div class="field-top"><span>每人每月人工登打 / 對帳</span><b id="hoursLabel">25 小時</b></div><input id="hours" type="range" min="5" max="80" step="5" value="25"></div>
+<div class="field"><div class="field-top"><span>預期效率提升</span><b id="gainLabel">75%</b></div><input id="gain" type="range" min="50" max="90" step="5" value="75"></div>
+<div class="field"><div class="field-top"><span>工具年費預算</span><b id="costLabel">NT$ 50,000</b></div><input id="cost" type="range" min="10000" max="300000" step="10000" value="50000"></div></div>
+<div><div class="kpis"><div class="kpi main"><small>一年可省下</small><strong id="savedHours">450 小時</strong></div><div class="kpi"><small>工時折算價值</small><strong id="savingMoney">NT$ 126,563</strong></div><div class="kpi"><small>預估 ROI</small><strong id="roiVal">153%</strong></div><div class="kpi"><small>預估回本</small><strong id="payback">4.7 個月</strong></div></div><div class="note">此模型只估算「人工工時」的直接價值，不包含錯帳降低、庫存改善、現金流風險預警等附加效益。</div></div></div></section>
+
+<section class="view" data-panel="tools"><div class="hero"><div class="eyebrow">工具探索</div><h1 class="display">先選想改善的問題，再找適合的工具。</h1><p class="lead">先用功能與問題篩選，再比較廠商、價格與導入條件。</p></div><div class="tools-top"><input class="search" id="toolSearch" placeholder="搜尋廠商、工具或功能"><select class="select" id="toolCategory"><option value="all">所有類型</option><option value="OCR">資料處理</option><option value="帳務">帳務管理</option><option value="分析">財務分析</option><option value="營運">營運管理</option><option value="風險">風險與稽核</option></select></div><div class="tool-list" id="toolList"></div></section>
+
+<section class="view feature-hidden" data-panel="cases" data-feature="cases"><div class="hero"><div class="eyebrow">真實案例</div><h1 class="display">別人導入後，真的差多少？</h1><p class="lead">案例不講長篇故事，直接看導入前後的改變。</p></div><div class="case-grid">
+<div class="case"><div class="case-tag">資料擷取與處理</div><h3>沅宸國際｜企業單據辨識</h3><p>每月需登打數百張憑證，財會人員一人身兼多職。</p><div class="metric"><strong>5 小時 → 1 小時內</strong><span>單據登打確認作業</span></div></div>
+<div class="case"><div class="case-tag">費用管理</div><h3>翔評互動｜COMMEET</h3><p>紙本報銷與個人信用卡代墊，財務核對耗時。</p><div class="metric"><strong>5 天 → 2 天</strong><span>報銷週期，效率提升 60%+</span></div></div>
+<div class="case"><div class="case-tag">記帳與關帳</div><h3>脊骨力物理治療所｜財報雲</h3><p>以 Excel 記錄收支，薪資與資料核對高度依賴人工。</p><div class="metric"><strong>4～5 天 → 幾分鐘</strong><span>薪資計算作業</span></div></div>
+<div class="case"><div class="case-tag">跨國財務分析</div><h3>黑沃餐飲｜Genie CFO</h3><p>台灣與馬來西亞資料分散，帳務整合與庫存管理困難。</p><div class="metric"><strong>7 天 → 3 天內</strong><span>整合作業；庫存降低 15%</span></div></div>
+</div></section>
+
+<section class="view" data-panel="guide"><div class="hero"><div class="eyebrow">從試用到真正落地</div><h1 class="display">先從一個問題開始，再一步一步導入。</h1><p class="lead">先整理資料、小範圍試用，再逐步擴大。</p></div><h2 class="section-head">7 個導入階段</h2><div class="timeline"><div class="stage"><div class="stage-num">01</div><h4>整理資料</h4><p>確認資料可用、格式一致。</p></div><div class="stage"><div class="stage-num">02</div><h4>盤點流程</h4><p>確認要接 ERP、POS、銀行或 Excel。</p></div><div class="stage"><div class="stage-num">03</div><h4>先做 PoC</h4><p>從最容易成功的工具測試。</p></div><div class="stage"><div class="stage-num">04</div><h4>小範圍試用</h4><p>先從部門、門市或單一流程開始。</p></div><div class="stage"><div class="stage-num">05</div><h4>顧好資安</h4><p>權限、法遵與人工覆核同步做。</p></div><div class="stage"><div class="stage-num">06</div><h4>讓大家會用</h4><p>教育訓練、SOP、FAQ 都要準備。</p></div><div class="stage"><div class="stage-num">07</div><h4>持續改善</h4><p>追蹤工時、準確率與實際成效。</p></div></div><div class="risk-grid"><div class="risk"><span class="icon">🔐</span><h4>公司資料不要亂貼</h4><p>客戶資料、帳號、薪資等重要資料，不要直接貼到公開 AI。</p></div><div class="risk"><span class="icon">🧠</span><h4>AI 算完要有人再看</h4><p>金額、付款、報表等重要結果，都要再由人確認一次。</p></div><div class="risk"><span class="icon">📋</span><h4>做過什麼要留紀錄</h4><p>誰用了 AI、改了什麼、最後怎麼決定，都要查得到。</p></div><div class="risk"><span class="icon">🔄</span><h4>資料要能帶走</h4><p>以後換系統時，資料要能下載帶走，不會卡在原本的系統裡。</p></div></div></section>
+</div>
+
+<section id="printReport" class="report-only">
+  <h1 class="report-title">AI 財務工具導入評估報告</h1>
+  <div class="report-sub">AI 財務工具互動指引｜依目前輸入結果自動產生</div>
+
+  <div class="report-section">
+    <h2>一、企業診斷摘要</h2>
+    <div class="report-grid">
+      <div class="report-box"><small>產業別</small><strong id="rIndustry">尚未填寫</strong></div>
+      <div class="report-box"><small>財會管理模式</small><strong id="rMode">尚未填寫</strong></div>
+      <div class="report-box"><small>AI 導入準備度</small><strong id="rScore">尚未完成診斷</strong></div>
+      <div class="report-box"><small>優先導入方向</small><strong id="rPriority">尚未完成診斷</strong></div>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>二、目前主要痛點</h2>
+    <ul class="report-list" id="rPains"><li>尚未選擇痛點</li></ul>
+  </div>
+
+  <div class="report-section">
+    <h2>三、建議優先改善方向</h2>
+    <ul class="report-list" id="rRecs"><li>完成診斷後將顯示建議方向</li></ul>
+  </div>
+
+  <div class="report-section">
+    <h2>四、ROI 試算摘要</h2>
+    <div class="report-grid">
+      <div class="report-box"><small>一年可釋放工時</small><strong id="rSaved">—</strong></div>
+      <div class="report-box"><small>年化可釋放人力價值</small><strong id="rMoney">—</strong></div>
+      <div class="report-box"><small>工時價值 ROI</small><strong id="rRoi">—</strong></div>
+      <div class="report-box"><small>估算回收期</small><strong id="rPayback">—</strong></div>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>五、計算基礎</h2>
+    <div class="report-note">
+      本試算模型依循企業生產力管理之「可釋放人力工時價值估算」邏輯，量化 AI 自動化所釋放的人力工時價值，並進一步推估投資回報與成本回收速度。<br>
+      2026 年台灣最低工資參考：月薪 NT$29,500；時薪 NT$196。月薪制與時薪制屬不同計薪方式，本模型針對月薪制人員，以實際月薪及年正常工時進行換算。
+    </div>
+  </div>
+
+  <div class="report-section">
+    <div class="report-note">※ 本工具依使用者填寫情境進行初步診斷，結果僅供導入評估參考，實際效益仍依企業流程、資料品質與導入情況而異。</div>
+  </div>
+</section>
+
+<script>
+(()=>{const app=document.getElementById('app');const tabs=[...app.querySelectorAll('.tab')],views=[...app.querySelectorAll('.view')];function view(n){tabs.forEach(t=>t.classList.toggle('active',t.dataset.view===n));views.forEach(v=>v.classList.toggle('active',v.dataset.panel===n));window.scrollTo({top:0,behavior:'smooth'})}tabs.forEach(t=>t.onclick=()=>view(t.dataset.view));
+const s={step:0,industry:'',mode:'',pains:[]},diags=[...app.querySelectorAll('.diag')];function step(n){s.step=n;diags.forEach(d=>d.classList.toggle('active',+d.dataset.step===n));progress.style.width=(n===0?0:n/4*100)+'%';stepLabel.textContent=n===0?'準備開始':n===4?'完成':'第 '+n+' / 3 步'}start.onclick=()=>step(1);app.querySelectorAll('.back').forEach(b=>b.onclick=()=>step(Math.max(0,s.step-1)));
+app.querySelectorAll('.industry').forEach(c=>c.onclick=()=>{s.industry=c.dataset.value;app.querySelectorAll('.industry').forEach(x=>x.classList.toggle('selected',x===c));app.querySelectorAll('.manu').forEach(x=>x.classList.toggle('hidden',s.industry!=='manufacturing'));app.querySelectorAll('.serv').forEach(x=>x.classList.toggle('hidden',s.industry!=='service'));s.pains=[];app.querySelectorAll('.pain').forEach(x=>x.classList.remove('selected'));resultBtn.disabled=true;setTimeout(()=>step(2),100)});
+app.querySelectorAll('.mode').forEach(c=>c.onclick=()=>{s.mode=c.dataset.value;app.querySelectorAll('.mode').forEach(x=>x.classList.toggle('selected',x===c));setTimeout(()=>step(3),100)});
+app.querySelectorAll('.pain').forEach(c=>c.onclick=()=>{const i=s.pains.indexOf(c.dataset.pain);if(i>=0){s.pains.splice(i,1);c.classList.remove('selected')}else if(s.pains.length<3){s.pains.push(c.dataset.pain);c.classList.add('selected')}painCount.textContent=s.pains.length+' / 3 已選擇';resultBtn.disabled=!s.pains.length});
+const lbl={manufacturing:'製造業',service:'服務業',outsourced:'委外記帳型',excel:'自主管理型',software:'財會系統型',integrated:'整合管理型'},rec={ocr:['單據自動辨識','讓發票、PDF、收據先自動變成可用資料','AI OCR'],expense:['費用與報銷自動化','把收據、核對、簽核流程變簡單','費用管理'],reconcile:['自動對帳','減少銀行與帳務資料人工核對','帳務自動化'],cashflow:['現金流儀表板','更快看到資金缺口與營運變化','財務分析'],inventory:['智慧庫存','協助判斷補貨量與安全庫存','營運預測'],procurement:['智慧採購','減少詢價、比價與供應商往返工作','營運自動化'],multisite:['多據點儀表板','快速整合各店營收、費用與損益','財務分析'],decision:['AI 財務分析','讓主管更快查詢數字與產出管理資訊','決策支援']};
+resultBtn.onclick=()=>{let score={outsourced:35,excel:55,software:72,integrated:88}[s.mode]||50;scoreNum.textContent=score;scoreFill.style.width=score+'%';scoreLabel.textContent=score<45?'先建立數位資料':score<65?'適合從小工具開始':score<82?'適合導入自動化與分析':'可以進一步做預測與決策支援';profile.textContent=(lbl[s.industry]||'企業')+' · '+(lbl[s.mode]||'');let l=[...s.pains];if(s.mode==='outsourced'&&!l.includes('ocr'))l.unshift('ocr');l=[...new Set(l)].slice(0,3);resultTitle.textContent='建議先從「'+rec[l[0]][0]+'」開始。';resultDesc.textContent=s.mode==='outsourced'?'目前不用急著上高階 AI。先建立可用的數位資料，會是最重要的一步。':'不用一次換掉所有系統。先從最有感的痛點做小範圍驗證。';recGrid.innerHTML=l.map((k,i)=>'<div class="rec"><div class="rank">'+(i===0?'01 · 最值得先做':i===1?'02 · 第二順位':'03 · 接著考慮')+'</div><h4>'+rec[k][0]+'</h4><p>'+rec[k][1]+'</p><span class="pill">'+rec[k][2]+'</span></div>').join('');step(4)};
+restart.onclick=()=>{s.industry='';s.mode='';s.pains=[];app.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));painCount.textContent='請選 1～3 個';step(0)};goTools.onclick=()=>view('tools');
+const fmt=n=>'NT$ '+Math.round(n).toLocaleString();function calc(){const a=+staff.value,b=+salary.value,c=+hours.value,d=+gain.value,e=+cost.value;staffLabel.textContent=a+' 人';salaryLabel.textContent=fmt(b);hoursLabel.textContent=c+' 小時';gainLabel.textContent=d+'%';costLabel.textContent=fmt(e);const saved=a*c*(d/100)*12,money=saved*((b*12)/2080),roi=((money-e)/e)*100,pay=e/(money/12);savedHours.textContent=Math.round(saved).toLocaleString()+' 小時';savingMoney.textContent=fmt(money);roiVal.textContent=Math.round(roi)+'%';payback.textContent=pay.toFixed(1)+' 個月'}[staff,salary,hours,gain,cost].forEach(x=>x.oninput=calc);calc();
+const tools=[['力新國際科技','企業單據辨識系統','OCR','辨識發票、費用單據，將單據轉為結構化資料','約 1.2 萬 / 年','可獨立導入'],['精益科技','單據 OCR 模組','OCR','辨識支票、發票與各式文件','每種模組約 3,000','可獨立導入'],['伊斯酷','RPA + AI 自動化','帳務','自動下載對帳單、對帳、沖銷與產出財報','專案報價','可獨立導入'],['擁樂數據','COMMEET 費用管理','帳務','拍照報銷、費用儀表板、AI 合規檢查','每人每月 480 起','可獨立導入'],['行動貝果','Genie CFO','分析','現金流、應收帳款、跨據點財務分析','約 10 萬 / 年','可獨立導入'],['財報雲','雲端財會系統','帳務','拍照記帳、自動切傳票、資金對帳','399 / 月起','完整財會軟體'],['思邁智能','AI 財會助理','分析','用自然語言查詢財務數據與報表','40 萬 / 年以下','專案導入'],['傑克商業自動化','AI 智慧稽核','風險','24/7 自動檢查異常交易與重複付款','1,500 / 90 天起','可獨立導入'],['Dynamics 365 BC','Business Central + Copilot','營運','自動對帳、採購、庫存、預測與情境模擬','3,535 / 人 / 月起','ERP 整合'],['鈞陽系統整合','ERP AI 模組','營運','單據辨識、詢價、比價與採購自動化','5,000 / 模組 / 月起','需搭配 ERP'],['天冠資訊','AI 智慧庫存','營運','智慧庫存與補貨建議','洽業者','需搭配既有系統'],['福迪兄弟','餐飲 POS / LINE 整合','帳務','POS、外送、金流、發票與損益整合','800–1,200 / 月','餐飲業']];function render(){const q=toolSearch.value.toLowerCase(),cat=toolCategory.value;toolList.innerHTML=tools.filter(t=>(cat==='all'||t[2]===cat)&&t.join(' ').toLowerCase().includes(q)).map(t=>'<div class="tool"><div class="tool-top"><div><h3>'+t[1]+'</h3><div class="vendor">'+t[0]+'</div></div><div class="price">'+t[4]+'</div></div><p>'+t[3]+'</p><span class="meta">'+t[2]+'</span><span class="meta">'+t[5]+'</span></div>').join('')}toolSearch.oninput=render;toolCategory.onchange=render;render();
+
+const introModal=document.getElementById('introModal');
+const introStart=document.getElementById('introStart');
+const introClose=document.getElementById('introClose');
+const introNoShow=document.getElementById('introNoShow');
+function hideIntro(){
+  if(introNoShow && introNoShow.checked){try{localStorage.setItem('aiFinanceIntroDismissed','1')}catch(e){}}
+  introModal.classList.remove('show');
+}
+function openIntro(){
+  let dismissed=false;
+  try{dismissed=localStorage.getItem('aiFinanceIntroDismissed')==='1'}catch(e){}
+  if(!dismissed){setTimeout(()=>introModal.classList.add('show'),550)}
+}
+introClose.addEventListener('click',hideIntro);
+introModal.addEventListener('click',e=>{if(e.target===introModal)hideIntro()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&introModal.classList.contains('show'))hideIntro()});
+introStart.addEventListener('click',()=>{hideIntro();view('diagnose');step(1);setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),40)});
+openIntro();
+
+
+const methodologyModal=document.getElementById('methodologyModal');
+const methodologyBtn=document.getElementById('methodologyBtn');
+const methodClose=document.getElementById('methodClose');
+const methodClose2=document.getElementById('methodClose2');
+const methodBack=document.getElementById('methodBack');
+function openMethod(){if(methodologyModal)methodologyModal.classList.add('show')}
+function closeMethod(){if(methodologyModal)methodologyModal.classList.remove('show')}
+if(methodologyBtn)methodologyBtn.addEventListener('click',openMethod);
+if(methodClose)methodClose.addEventListener('click',closeMethod);
+if(methodClose2)methodClose2.addEventListener('click',closeMethod);
+if(methodBack)methodBack.addEventListener('click',closeMethod);
+if(methodologyModal)methodologyModal.addEventListener('click',e=>{if(e.target===methodologyModal)closeMethod()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&methodologyModal&&methodologyModal.classList.contains('show'))closeMethod()});
+
+
+
+function showActionToast(msg){
+  const el=document.getElementById('actionToast');
+  if(!el)return;
+  el.textContent=msg;
+  el.classList.add('show');
+  clearTimeout(window.__actionToastTimer);
+  window.__actionToastTimer=setTimeout(()=>el.classList.remove('show'),2200);
+}
+
+function downloadOfflineFile(){
+  try{
+    showActionToast('正在準備離線 HTML 檔…');
+    const clone=document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.intro-overlay.show,.method-overlay.show').forEach(x=>x.classList.remove('show'));
+    const serialized='<!doctype html>\n'+clone.outerHTML;
+    const blob=new Blob([serialized],{type:'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    const now=new Date();
+    const pad=n=>String(n).padStart(2,'0');
+    const stamp=now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate());
+    a.href=url;
+    a.download='AI財務工具互動指引_離線版_'+stamp+'.html';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{
+      a.remove();
+      URL.revokeObjectURL(url);
+      showActionToast('離線 HTML 已開始下載');
+    },300);
+  }catch(err){
+    console.error(err);
+    showActionToast('下載失敗，請改用瀏覽器「另存網頁」');
+  }
+}
+
+function updatePrintReport(){
+  const industryMap={manufacturing:'製造業',service:'服務業'};
+  const modeMap={outsourced:'委外記帳型',excel:'自主管理型',software:'財會系統型',integrated:'整合管理型'};
+  const painMap={
+    ocr:'人工輸入／單據登打',
+    expense:'報銷流程繁瑣',
+    reconcile:'月底對帳耗時',
+    cashflow:'現金流掌握困難',
+    inventory:'庫存抓不準',
+    procurement:'採購流程人工化',
+    multisite:'多店資料分散',
+    decision:'管理數字取得太慢'
+  };
+  const rid=id=>document.getElementById(id);
+
+  if(rid('rIndustry')) rid('rIndustry').textContent=industryMap[s.industry]||'尚未填寫';
+  if(rid('rMode')) rid('rMode').textContent=modeMap[s.mode]||'尚未填寫';
+
+  const scoreTxt=rid('scoreNum') ? rid('scoreNum').textContent : '';
+  if(rid('rScore')) rid('rScore').textContent=s.step===4 && scoreTxt ? scoreTxt+' / 100' : '尚未完成診斷';
+
+  const rt=rid('resultTitle') ? rid('resultTitle').textContent : '';
+  if(rid('rPriority')) rid('rPriority').textContent=s.step===4 && rt ? rt.replace('建議先從「','').replace('」開始。','') : '尚未完成診斷';
+
+  if(rid('rPains')){
+    rid('rPains').innerHTML=s.pains.length
+      ? s.pains.map(k=>'<li>'+(painMap[k]||k)+'</li>').join('')
+      : '<li>尚未選擇痛點</li>';
+  }
+
+  const recNodes=[...document.querySelectorAll('#recGrid .rec h4')];
+  if(rid('rRecs')){
+    rid('rRecs').innerHTML=recNodes.length
+      ? recNodes.map(n=>'<li>'+n.textContent+'</li>').join('')
+      : '<li>完成診斷後將顯示建議方向</li>';
+  }
+
+  if(rid('rSaved')) rid('rSaved').textContent=rid('savedHours') ? rid('savedHours').textContent : '—';
+  if(rid('rMoney')) rid('rMoney').textContent=rid('savingMoney') ? rid('savingMoney').textContent : '—';
+  if(rid('rRoi')) rid('rRoi').textContent=rid('roiVal') ? rid('roiVal').textContent : '—';
+  if(rid('rPayback')) rid('rPayback').textContent=rid('payback') ? rid('payback').textContent : '—';
+}
+
+function exportCurrentReport(){
+  try{
+    updatePrintReport();
+    showActionToast('正在開啟報告列印畫面…');
+    window.focus();
+    window.print();
+  }catch(err){
+    console.error(err);
+    showActionToast('無法開啟列印，請用瀏覽器選單 → 列印 → 另存 PDF');
+  }
+}
+
+window.downloadOfflineFile=downloadOfflineFile;
+window.exportCurrentReport=exportCurrentReport;
+
+const downloadOfflineBtn=document.getElementById('downloadOffline');
+const exportReportBtn=document.getElementById('exportReport');
+if(downloadOfflineBtn){
+  downloadOfflineBtn.addEventListener('click',function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    downloadOfflineFile();
+  });
+}
+if(exportReportBtn){
+  exportReportBtn.addEventListener('click',function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    exportCurrentReport();
+  });
+}
+
+const mobileTabs=[...document.querySelectorAll('.mobile-app-tab')];
+mobileTabs.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const name=btn.dataset.mobileView;
+    view(name);
+    mobileTabs.forEach(x=>x.classList.toggle('active',x===btn));
+  });
+});
+tabs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    mobileTabs.forEach(x=>x.classList.toggle('active',x.dataset.mobileView===t.dataset.view));
+  });
+});
+
+})();
+</script>
+
+<nav class="mobile-app-nav" aria-label="手機版主要功能">
+  <button class="mobile-app-tab active" type="button" data-mobile-view="diagnose">
+    <svg class="micon" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15.5 15.5l1.8 1.8 3-3.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>找工具</span>
+  </button>
+  <button class="mobile-app-tab" type="button" data-mobile-view="roi">
+    <svg class="micon" viewBox="0 0 24 24" fill="none"><path d="M4 19h16M6 16l4-5 3 3 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>算效益</span>
+  </button>
+  <button class="mobile-app-tab" type="button" data-mobile-view="tools">
+    <svg class="micon" viewBox="0 0 24 24" fill="none"><path d="M6 5h12v4H6zM6 11h12v8H6z" stroke="currentColor" stroke-width="1.8"/><path d="M9 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span>工具庫</span>
+  </button>
+  <button class="mobile-app-tab" type="button" data-mobile-view="guide">
+    <svg class="micon" viewBox="0 0 24 24" fill="none"><path d="M7 4h10v16H7zM10 8h4M10 12h4M10 16h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span>怎麼導入</span>
+  </button>
+</nav>
+
+<div class="action-toast" id="actionToast" role="status" aria-live="polite"></div>
+</body>
+</html>
