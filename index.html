@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI 財務工具互動指引｜新版完整原型</title>
+<title>AI 財務工具互動指引｜樣式 B 風險調整版</title>
 <style>
 :root{--navy:#000079;--orange:#F75000;--red:#930000;--ink:#111827;--muted:#667085}
 *{box-sizing:border-box} body{margin:0;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif}
@@ -1038,19 +1038,19 @@ button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 2
       <span class="method-badge">Methodology｜計算邏輯</span>
       <button class="method-close" id="methodClose" type="button" aria-label="關閉">×</button>
     </div>
-    <h2 class="method-title" id="methodTitle">AI 財務工具工時價值與回收期怎麼算？</h2>
-    <p class="method-lead">本試算模型依循企業生產力管理之「可釋放人力工時價值估算」邏輯，量化 AI 自動化所釋放的人力工時價值，並進一步推估投資回報與成本回收速度。</p>
+    <h2 class="method-title" id="methodTitle">AI 財務工具情境試算怎麼算？</h2>
+    <p class="method-lead">本試算以可釋放人力工時價值作為情境估算基礎，協助比較不同導入假設下的工時價值與估算回收期；結果須以企業實測與實際報價驗證。</p>
 
     <div class="method-callout">
-      <strong>2026 年台灣最低工資基準</strong><br>
-      自 2026 年 1 月 1 日起：每月最低工資 <b>NT$29,500</b>；每小時最低工資 <b>NT$196</b>。<br>
-      <span style="font-size:13px;color:#667085">注意：月薪制與時薪制是不同計薪制度，不能直接用 29,500 ÷ 某個固定時數去宣稱等於法定最低時薪。</span>
+      <strong>薪資輸入與法定最低工資提醒</strong><br>
+      請依企業實際薪資及最新法定最低工資輸入；相關法令與數額應以主管機關最新公告為準。<br>
+      <span style="font-size:13px;color:#667085">注意：月薪制與時薪制是不同計薪制度，不能直接以月薪除以固定時數推論法定最低時薪。</span>
     </div>
 
     <h3 style="color:var(--navy);margin:20px 0 10px">一、5 個輸入變數</h3>
     <div class="method-vars">
       <div class="method-var"><b>N｜財會人員數</b><br>實際參與登打、對帳、報表整理等作業的人數。</div>
-      <div class="method-var"><b>S｜平均月薪</b><br>參與人員的平均每月薪資；預設不得低於 2026 月最低工資 NT$29,500。</div>
+      <div class="method-var"><b>S｜平均月薪</b><br>參與人員的平均每月薪資；請依企業實際情況與最新法定規範設定。</div>
       <div class="method-var"><b>H｜每月人工工時</b><br>每人每月花在可被自動化工作上的時間。</div>
       <div class="method-var"><b>E｜預期工時減省率</b><br>AI 導入後預估可減少的人工比例；建議以實際 PoC 結果調整。</div>
       <div class="method-var"><b>C｜年度 AI 成本</b><br>軟體授權、模組或年度服務費；若有一次性導入費，正式評估時應另外納入。</div>
@@ -1081,7 +1081,7 @@ button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 2
     </div>
 
     <div class="method-warning">
-      <b>顧問補充｜生產力價值 ≠ 一定省下同額現金</b><br>
+      <b>重要提醒｜工時價值不等於現金節省</b><br>
       例如 AI 每年釋放 500 小時，不代表公司一定少付 500 小時薪資；更常見的是把這些時間移去做催收、分析、預算、管理報表等更高價值工作。因此此處呈現為「工時價值 ROI」。正式投資評估可再另算「現金 ROI」。<br><br>
       <b>最低時薪 196 元的用途：</b>若企業採時薪人員，可直接用實際時薪，且不得低於 NT$196；若是月薪制人員，本模型以實際月薪及全年正常工時換算，不把 196 元硬套為月薪制的時薪。
     </div>
@@ -1097,12 +1097,11 @@ button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 2
 <button class="tab active" data-view="diagnose">幫我找工具</button>
 <button class="tab" data-view="roi">算算能省多少</button>
 <button class="tab" data-view="tools">有哪些工具</button>
-<button class="tab feature-hidden" data-view="cases" data-feature="cases">看看案例</button>
 <button class="tab" data-view="guide">怎麼導入</button>
 </div>
 <div class="utility-actions no-print">
-  <button class="utility-btn" type="button" id="downloadOffline" onclick="return window.downloadOfflineFile ? (window.downloadOfflineFile(), false) : false;" data-tip="💾 離線互動檔：儲存完整互動軟體檔案，免連網也能隨時離線操作與分享同仁。">💾 下載離線檔 (.html)</button>
-  <button class="utility-btn primary" type="button" id="exportReport" onclick="return window.exportCurrentReport ? (window.exportCurrentReport(), false) : false;" data-tip="📄 匯出報告：將目前診斷結果與 ROI 試算整理成 A4 報告，可在列印視窗選擇「另存為 PDF」。">📄 匯出報告</button>
+  <button class="utility-btn" type="button" id="downloadOffline" onclick="return window.downloadOfflineFile ? (window.downloadOfflineFile(), false) : false;" data-tip="💾 離線互動檔：儲存完整互動檔案，分享前請確認不含未公開資料。">💾 下載離線檔 (.html)</button>
+  <button class="utility-btn primary" type="button" id="exportReport" onclick="return window.exportCurrentReport ? (window.exportCurrentReport(), false) : false;" data-tip="📄 匯出報告：將目前診斷與情境試算整理成 A4 報告；結果須以企業實測與實際報價驗證。">📄 匯出報告</button>
 </div></div></div>
 
 <section class="view active" data-panel="diagnose">
@@ -1175,26 +1174,20 @@ button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 2
 <div class="diag" data-step="4"><div class="result-hero"><div><div class="eyebrow" id="profile">你的企業輪廓</div><h2 class="title" id="resultTitle">找到你的優先方向了。</h2><p class="sub" id="resultDesc"></p></div><div class="score"><small>AI 導入準備度</small><strong id="scoreNum">55</strong><div id="scoreLabel">適合從小工具開始</div><div class="scorebar"><span id="scoreFill" style="width:55%"></span></div></div></div><div class="recs" id="recGrid"></div><div class="actions"><button class="btn alt" id="restart">重新測一次</button><button class="btn" id="goTools">看看適合的工具 →</button></div></div>
 </section>
 
-<section class="view" data-panel="roi"><div class="hero"><div class="eyebrow">互動試算</div><h1 class="display">如果少做一點重複工作，一年可以省多少？</h1><p class="lead">調整人數、薪資、人工工時、效率提升與軟體成本，即時估算節省工時、年化效益、ROI 與回本時間。</p>
+<section class="view" data-panel="roi"><div class="hero"><div class="eyebrow">互動試算</div><h1 class="display">減少重複工作，能釋放多少工時價值？</h1><p class="lead">調整人數、薪資、人工工時、效率提升與軟體成本，進行情境試算；結果須以企業實測與實際報價驗證。</p>
 <div class="actions" style="margin-top:20px">
   <button class="btn alt" type="button" id="methodologyBtn">📐 這個數字怎麼算？</button>
-  <span style="align-self:center;font-size:13px;color:#667085">2026 台灣最低工資：月薪 NT$29,500／時薪 NT$196</span>
+  <span style="align-self:center;font-size:13px;color:#667085">薪資與法定最低工資請依主管機關最新公告及企業實際情況設定</span>
 </div></div><div class="roi-grid"><div class="panel">
 <div class="field"><div class="field-top"><span>財會人員</span><b id="staffLabel">2 人</b></div><input id="staff" type="range" min="1" max="20" value="2"></div>
 <div class="field"><div class="field-top"><span>平均月薪</span><b id="salaryLabel">NT$ 45,000</b></div><input id="salary" type="range" min="29500" max="120000" step="500" value="45000"></div>
 <div class="field"><div class="field-top"><span>每人每月人工登打 / 對帳</span><b id="hoursLabel">25 小時</b></div><input id="hours" type="range" min="5" max="80" step="5" value="25"></div>
-<div class="field"><div class="field-top"><span>預期效率提升</span><b id="gainLabel">75%</b></div><input id="gain" type="range" min="50" max="90" step="5" value="75"></div>
+<div class="field"><div class="field-top"><span>情境效率提升（示例）</span><b id="gainLabel">50%</b></div><input id="gain" type="range" min="0" max="90" step="5" value="50"></div>
 <div class="field"><div class="field-top"><span>工具年費預算</span><b id="costLabel">NT$ 50,000</b></div><input id="cost" type="range" min="10000" max="300000" step="10000" value="50000"></div></div>
-<div><div class="kpis"><div class="kpi main"><small>一年可省下</small><strong id="savedHours">450 小時</strong></div><div class="kpi"><small>工時折算價值</small><strong id="savingMoney">NT$ 126,563</strong></div><div class="kpi"><small>預估 ROI</small><strong id="roiVal">153%</strong></div><div class="kpi"><small>預估回本</small><strong id="payback">4.7 個月</strong></div></div><div class="note">此模型只估算「人工工時」的直接價值，不包含錯帳降低、庫存改善、現金流風險預警等附加效益。</div></div></div></section>
+<div><div class="kpis"><div class="kpi main"><small>一年可釋放工時（情境）</small><strong id="savedHours">300 小時</strong></div><div class="kpi"><small>年化工時價值（估算）</small><strong id="savingMoney">NT$ 84,375</strong></div><div class="kpi"><small>工時價值 ROI（估算）</small><strong id="roiVal">69%</strong></div><div class="kpi"><small>估算回收期（工時價值）</small><strong id="payback">7.1 個月</strong></div></div><div class="note"><b>情境假設／示例：</b>本模型僅估算人工工時價值，須以企業實測與實際報價驗證；工時價值不等於現金節省，亦不包含錯帳降低、庫存改善、現金流風險預警等附加效益。</div></div></div></section>
 
-<section class="view" data-panel="tools"><div class="hero"><div class="eyebrow">工具探索</div><h1 class="display">先選想改善的問題，再找適合的工具。</h1><p class="lead">先用功能與問題篩選，再比較廠商、價格與導入條件。</p></div><div class="tools-top"><input class="search" id="toolSearch" placeholder="搜尋廠商、工具或功能"><select class="select" id="toolCategory"><option value="all">所有類型</option><option value="OCR">資料處理</option><option value="帳務">帳務管理</option><option value="分析">財務分析</option><option value="營運">營運管理</option><option value="風險">風險與稽核</option></select></div><div class="tool-list" id="toolList"></div></section>
+<section class="view" data-panel="tools"><div class="hero"><div class="eyebrow">工具探索</div><h1 class="display">先選想改善的問題，再找適合的工具。</h1><p class="lead">先用功能與問題篩選，再比較廠商、價格與導入條件。</p><div class="note">資料更新日：2026 年 9 月 2 日｜資料來源：公開產品資訊與廠商公開資料彙整。價格以廠商最新報價為準；未列入不代表不適用。本工具為示範／探索用途，不代表主管機關或計畫之採購推薦、認證或背書。</div></div><div class="tools-top"><input class="search" id="toolSearch" placeholder="搜尋廠商、工具或功能"><select class="select" id="toolCategory"><option value="all">所有類型</option><option value="OCR">資料處理</option><option value="帳務">帳務管理</option><option value="分析">財務分析</option><option value="營運">營運管理</option><option value="風險">風險與稽核</option></select></div><div class="tool-list" id="toolList"></div></section>
 
-<section class="view feature-hidden" data-panel="cases" data-feature="cases"><div class="hero"><div class="eyebrow">真實案例</div><h1 class="display">別人導入後，真的差多少？</h1><p class="lead">案例不講長篇故事，直接看導入前後的改變。</p></div><div class="case-grid">
-<div class="case"><div class="case-tag">資料擷取與處理</div><h3>沅宸國際｜企業單據辨識</h3><p>每月需登打數百張憑證，財會人員一人身兼多職。</p><div class="metric"><strong>5 小時 → 1 小時內</strong><span>單據登打確認作業</span></div></div>
-<div class="case"><div class="case-tag">費用管理</div><h3>翔評互動｜COMMEET</h3><p>紙本報銷與個人信用卡代墊，財務核對耗時。</p><div class="metric"><strong>5 天 → 2 天</strong><span>報銷週期，效率提升 60%+</span></div></div>
-<div class="case"><div class="case-tag">記帳與關帳</div><h3>脊骨力物理治療所｜財報雲</h3><p>以 Excel 記錄收支，薪資與資料核對高度依賴人工。</p><div class="metric"><strong>4～5 天 → 幾分鐘</strong><span>薪資計算作業</span></div></div>
-<div class="case"><div class="case-tag">跨國財務分析</div><h3>黑沃餐飲｜Genie CFO</h3><p>台灣與馬來西亞資料分散，帳務整合與庫存管理困難。</p><div class="metric"><strong>7 天 → 3 天內</strong><span>整合作業；庫存降低 15%</span></div></div>
-</div></section>
 
 <section class="view" data-panel="guide"><div class="hero"><div class="eyebrow">從試用到真正落地</div><h1 class="display">先從一個問題開始，再一步一步導入。</h1><p class="lead">先整理資料、小範圍試用，再逐步擴大。</p></div><h2 class="section-head">7 個導入階段</h2><div class="timeline"><div class="stage"><div class="stage-num">01</div><h4>整理資料</h4><p>確認資料可用、格式一致。</p></div><div class="stage"><div class="stage-num">02</div><h4>盤點流程</h4><p>確認要接 ERP、POS、銀行或 Excel。</p></div><div class="stage"><div class="stage-num">03</div><h4>先做 PoC</h4><p>從最容易成功的工具測試。</p></div><div class="stage"><div class="stage-num">04</div><h4>小範圍試用</h4><p>先從部門、門市或單一流程開始。</p></div><div class="stage"><div class="stage-num">05</div><h4>顧好資安</h4><p>權限、法遵與人工覆核同步做。</p></div><div class="stage"><div class="stage-num">06</div><h4>讓大家會用</h4><p>教育訓練、SOP、FAQ 都要準備。</p></div><div class="stage"><div class="stage-num">07</div><h4>持續改善</h4><p>追蹤工時、準確率與實際成效。</p></div></div><div class="risk-grid"><div class="risk"><span class="icon">🔐</span><h4>公司資料不要亂貼</h4><p>客戶資料、帳號、薪資等重要資料，不要直接貼到公開 AI。</p></div><div class="risk"><span class="icon">🧠</span><h4>AI 算完要有人再看</h4><p>金額、付款、報表等重要結果，都要再由人確認一次。</p></div><div class="risk"><span class="icon">📋</span><h4>做過什麼要留紀錄</h4><p>誰用了 AI、改了什麼、最後怎麼決定，都要查得到。</p></div><div class="risk"><span class="icon">🔄</span><h4>資料要能帶走</h4><p>以後換系統時，資料要能下載帶走，不會卡在原本的系統裡。</p></div></div></section>
 </div>
@@ -1236,13 +1229,14 @@ button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 2
   <div class="report-section">
     <h2>五、計算基礎</h2>
     <div class="report-note">
-      本試算模型依循企業生產力管理之「可釋放人力工時價值估算」邏輯，量化 AI 自動化所釋放的人力工時價值，並進一步推估投資回報與成本回收速度。<br>
-      2026 年台灣最低工資參考：月薪 NT$29,500；時薪 NT$196。月薪制與時薪制屬不同計薪方式，本模型針對月薪制人員，以實際月薪及年正常工時進行換算。
+      本試算以可釋放人力工時價值作為情境估算基礎；結果須以企業實測與實際報價驗證。工時價值不等於現金節省，正式投資評估應另納入實際人事、委外、導入與維運成本。<br>
+      薪資與法定最低工資請依主管機關最新公告及企業實際情況設定；月薪制與時薪制屬不同計薪方式，不宜直接換算或互相推論。
     </div>
   </div>
 
   <div class="report-section">
-    <div class="report-note">※ 本工具依使用者填寫情境進行初步診斷，結果僅供導入評估參考，實際效益仍依企業流程、資料品質與導入情況而異。</div>
+    <div class="report-note">※ 本工具為示範／探索用途，不代表主管機關或計畫之採購推薦、認證或背書。資料更新日：2026 年 9 月 2 日；工具價格以廠商最新報價為準，未列入不代表不適用。本網站不蒐集試算輸入；請勿輸入客戶、薪資、帳號或未公開財務資料。</div>
+    <div class="report-note" style="margin-top:3mm">© 2026 本工具內容保留所有權利｜版本：樣式 B 風險調整版 v1.0｜使用限制：僅供示範、探索與內部評估；未經權利人書面同意，不得重製、改作、散布或作為對外商業宣稱。</div>
   </div>
 </section>
 
@@ -1441,6 +1435,13 @@ tabs.forEach(t=>{
     <span>怎麼導入</span>
   </button>
 </nav>
+
+<footer style="max-width:1180px;margin:24px auto 96px;padding:20px;border-top:1px solid #e3e6eb;color:#667085;font-size:12px;line-height:1.7">
+  <div>本工具為示範／探索用途，不代表主管機關或計畫之採購推薦、認證或背書。</div>
+  <div>資料更新日：2026 年 9 月 2 日｜資料來源：公開產品資訊與廠商公開資料彙整｜價格以廠商最新報價為準，未列入不代表不適用。</div>
+  <div>本網站不蒐集試算輸入；請勿輸入客戶、薪資、帳號或未公開財務資料。</div>
+  <div>© 2026 本工具內容保留所有權利｜版本：樣式 B 風險調整版 v1.0｜使用限制：僅供示範、探索與內部評估；未經權利人書面同意，不得重製、改作、散布或作為對外商業宣稱。</div>
+</footer>
 
 <div class="action-toast" id="actionToast" role="status" aria-live="polite"></div>
 </body>
