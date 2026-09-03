@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI 財務工具互動指引｜樣式 B 風險調整版</title>
+<title>AI 財務工具評估與選型互動診斷系統_樣式B情境引導</title>
 <style>
 :root{--navy:#000079;--orange:#F75000;--red:#930000;--ink:#111827;--muted:#667085}
 *{box-sizing:border-box} body{margin:0;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif}
@@ -1236,7 +1236,7 @@ button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 2
 
   <div class="report-section">
     <div class="report-note">※ 本工具為示範／探索用途，不代表主管機關或計畫之採購推薦、認證或背書。資料更新日：2026 年 9 月 2 日；工具價格以廠商最新報價為準，未列入不代表不適用。本網站不蒐集試算輸入；請勿輸入客戶、薪資、帳號或未公開財務資料。</div>
-    <div class="report-note" style="margin-top:3mm">© 2026 本工具內容保留所有權利｜版本：樣式 B 風險調整版 v1.0｜使用限制：僅供示範、探索與內部評估；未經權利人書面同意，不得重製、改作、散布或作為對外商業宣稱。</div>
+    <div class="report-note" style="margin-top:3mm">© 2026 本工具內容保留所有權利｜版本：AI 財務工具評估與選型互動診斷系統_樣式B情境引導｜使用限制：僅供示範、探索與內部評估；未經權利人書面同意，不得重製、改作、散布或作為對外商業宣稱。</div>
   </div>
 </section>
 
@@ -1400,19 +1400,26 @@ if(exportReportBtn){
   });
 }
 
-const mobileTabs=[...document.querySelectorAll('.mobile-app-tab')];
-mobileTabs.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const name=btn.dataset.mobileView;
-    view(name);
-    mobileTabs.forEach(x=>x.classList.toggle('active',x===btn));
+function bindMobileTabs(){
+  const mobileTabs=[...document.querySelectorAll('.mobile-app-tab')];
+  mobileTabs.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const name=btn.dataset.mobileView;
+      view(name);
+      mobileTabs.forEach(x=>x.classList.toggle('active',x===btn));
+    });
   });
-});
-tabs.forEach(t=>{
-  t.addEventListener('click',()=>{
-    mobileTabs.forEach(x=>x.classList.toggle('active',x.dataset.mobileView===t.dataset.view));
+  tabs.forEach(t=>{
+    t.addEventListener('click',()=>{
+      mobileTabs.forEach(x=>x.classList.toggle('active',x.dataset.mobileView===t.dataset.view));
+    });
   });
-});
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',bindMobileTabs,{once:true});
+}else{
+  bindMobileTabs();
+}
 
 })();
 </script>
@@ -1440,7 +1447,7 @@ tabs.forEach(t=>{
   <div>本工具為示範／探索用途，不代表主管機關或計畫之採購推薦、認證或背書。</div>
   <div>資料更新日：2026 年 9 月 2 日｜資料來源：公開產品資訊與廠商公開資料彙整｜價格以廠商最新報價為準，未列入不代表不適用。</div>
   <div>本網站不蒐集試算輸入；請勿輸入客戶、薪資、帳號或未公開財務資料。</div>
-  <div>© 2026 本工具內容保留所有權利｜版本：樣式 B 風險調整版 v1.0｜使用限制：僅供示範、探索與內部評估；未經權利人書面同意，不得重製、改作、散布或作為對外商業宣稱。</div>
+  <div>© 2026 本工具內容保留所有權利｜版本：AI 財務工具評估與選型互動診斷系統_樣式B情境引導｜使用限制：僅供示範、探索與內部評估；未經權利人書面同意，不得重製、改作、散布或作為對外商業宣稱。</div>
 </footer>
 
 <div class="action-toast" id="actionToast" role="status" aria-live="polite"></div>
